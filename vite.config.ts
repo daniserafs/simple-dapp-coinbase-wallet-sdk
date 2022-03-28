@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import inject from '@rollup/plugin-inject'
+import NodeGlobalsPolyfillPlugin from "@esbuild-plugins/node-globals-polyfill";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -14,12 +15,26 @@ export default defineConfig(({ mode }) => {
             },
           }
         : undefined,
-
-    define:
-      mode === 'development'
-        ? {
-            global: {},
+        resolve: {
+          alias: {
+            util: "util",
+          },
+        },
+        optimizeDeps: {
+          esbuildOptions:{
+            define : {
+              global: 'globalThis',
+            },
+          plugins: mode === 'development' ? [
+            NodeGlobalsPolyfillPlugin({
+              buffer: true,
+              process: true,
+            })
+          ] : undefined,
           }
-        : undefined,
+        }
+    
+          
+          
   };
 });

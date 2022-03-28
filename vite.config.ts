@@ -1,13 +1,13 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import NodeGlobalPolyfillPlugin from '@esbuild-plugins/node-globals-polyfill';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import NodeGlobalPolyfillPlugin from "@esbuild-plugins/node-globals-polyfill";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      util:'util',
+      util: "util",
     },
   },
   optimizeDeps: {
@@ -23,5 +23,4 @@ export default defineConfig({
       ],
     },
   },
-})
-;
+});

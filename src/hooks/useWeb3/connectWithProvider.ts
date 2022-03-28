@@ -1,16 +1,16 @@
 import { connectCoinbaseWallet } from "./connectors/coinbaseWallet";
 import type {
-    ConnectedReturnType,
-    ProviderStringType,
+  ConnectedReturnType,
+  ProviderStringType,
 } from "../../utils/types";
 
 export const connectWithProvider = async (
-    providerString: ProviderStringType
+  providerString: ProviderStringType
 ): Promise<ConnectedReturnType> => connectors[providerString]();
 
 const connectors: Record<
-ProviderStringType,
-() => Promise<ConnectedReturnType>
+  ProviderStringType,
+  () => Promise<ConnectedReturnType>
 > = {
-    coinbase: connectCoinbaseWallet,
+  coinbase: connectCoinbaseWallet,
 };

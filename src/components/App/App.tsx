@@ -1,21 +1,21 @@
-import './App.css';
-import logo from '../../../src/logo.svg';
-import { useState, useEffect, useCallback } from 'react';
-import { useWeb3 } from '../../hooks/useWeb3/useWeb3';
-import { Disconnected } from '../Disconnected/Disconnected';
-import { Connected } from '../Connected/Connected';
-import type { ProviderStringType } from '../../utils/types'
-
+import "./App.css";
+import logo from "../../../src/logo.svg";
+import { useState, useEffect, useCallback } from "react";
+import { useWeb3 } from "../../hooks/useWeb3/useWeb3";
+import { Disconnected } from "../Disconnected/Disconnected";
+import { Connected } from "../Connected/Connected";
+import type { ProviderStringType } from "../../utils/types";
 
 function App() {
-  const [count, setCount] = useState(0)
-  const { connectProvider, changeProvider, providerString, account, web3 } = useWeb3();
+  const [count, setCount] = useState(0);
+  const { connectProvider, changeProvider, providerString, account, web3 } =
+    useWeb3();
   const [loading, setLoading] = useState(!!providerString);
   const connected = !!account && !!web3;
 
   useEffect(() => {
-    if(connected && loading) setLoading(false);
-  },[connected, loading]);
+    if (connected && loading) setLoading(false);
+  }, [connected, loading]);
   const handleConnectProvider = useCallback(
     async (provider) => {
       setLoading(true);
@@ -30,27 +30,30 @@ function App() {
     setLoading(true);
     changeProvider();
     setLoading(false);
-  }, [changeProvider])
+  }, [changeProvider]);
 
   return (
     <div className="App">
       <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" /> 
+        <img src={logo} className="App-logo" alt="logo" />
         {loading ? (
           <p>loading...</p>
         ) : (
           <div>
-            {!connected && <Disconnected handleConnect={handleConnectProvider} />}
+            {!connected && (
+              <Disconnected handleConnect={handleConnectProvider} />
+            )}
             {connected && (
               <Connected
-              web3={web3}
-              account={account}
-              providerString={providerString}
-              handleChangeProvider={handleChangeProvider} />
+                web3={web3}
+                account={account}
+                providerString={providerString}
+                handleChangeProvider={handleChangeProvider}
+              />
             )}
           </div>
         )}
-        
+
         <p>Hello Vite + React!</p>
         <p>
           <button type="button" onClick={() => setCount((count) => count + 1)}>
@@ -69,7 +72,7 @@ function App() {
           >
             Learn React
           </a>
-          {' | '}
+          {" | "}
           <a
             className="App-link"
             href="https://vitejs.dev/guide/features.html"
@@ -81,7 +84,7 @@ function App() {
         </p>
       </header>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

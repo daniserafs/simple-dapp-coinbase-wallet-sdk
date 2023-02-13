@@ -2,5 +2,5 @@
 
 ## Running on your local machine
   create .env.local file, follow the .env.example to add your own INFURA PROJECT ID
-
-  on terminal `yarn install` after `yarn dev`
+  on terminal `yarn install` 
+  on terminal `yarn dev`
